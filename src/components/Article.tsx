@@ -1,10 +1,11 @@
+import React from 'react'
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import News from "../interfaces/News";
 
-const Article = () => {
-  const params = useParams();
+export default function Article() {
+   const params = useParams();
   const articleId = params.articleId;
 
   const [article, setArticle] = useState<News | null>(null);
@@ -47,5 +48,3 @@ const Article = () => {
     </Container>
   );
 };
-
-export default Article;

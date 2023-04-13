@@ -33,7 +33,7 @@ const Home = () => {
           <Col className="text-center">
             <Spinner variant="info" animation="border" />
           </Col>
-        ) : (
+        ) : Array.isArray(articles) && articles.length > 0 ? (
           articles.map((article) => (
             <Col key={article.id} xs={12} md={6} lg={4}>
               <Link to={`/article/${article.id}`} style={{ textDecoration: "none" }}>
@@ -50,6 +50,10 @@ const Home = () => {
               </Link>
             </Col>
           ))
+        ) : (
+          <Col className="text-center">
+            <p>No articles found</p>
+          </Col>
         )}
       </Row>
     </Container>
