@@ -1,30 +1,29 @@
-import React from 'react'
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import News from "../interfaces/News";
 
-export default function Article() {
-   const params = useParams();
+const Article = () => {
+  const params = useParams();
   const articleId = params.articleId;
 
   const [article, setArticle] = useState<News | null>(null);
 
   useEffect(() => {
-    fetchArticle();
-  }, []);
-
-  const fetchArticle = async () => {
-    try {
-      const response = await fetch("https://api.spaceflightnewsapi.net/v4/articles/" + articleId);
-      if (response.ok) {
-        const data: News = await response.json();
-        setArticle(data);
+    const fetchArticle = async () => {
+      try {
+        const response = await fetch(`https://api.spaceflightnewsapi.net/v4/articles/${articleId}`);
+        if (response.ok) {
+          const data: News = await response.json();
+          setArticle(data);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+  
+    fetchArticle();
+  }, [articleId]);
 
   return (
     <Container className="mt-3">
@@ -48,3 +47,5 @@ export default function Article() {
     </Container>
   );
 };
+
+export default Article;
